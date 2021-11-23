@@ -27,6 +27,7 @@ body{
 /* NAVBAR */
 .container .navbar {
     position: fixed;
+    top: 0;
     display: flex;
     align-items: center;
     width: 100vw;
@@ -59,4 +60,193 @@ body{
     transform: translate(-50%,-50%);
     font-size: 25px;
     font-weight: 500;
+}
+
+/* MAIN SECTION */
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 577px;
+    padding-top: 60px;
+}
+
+.main-content .calculator {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 410px;
+    width: 371px;
+    padding: 10px 23px;
+    border-radius: 8px;
+    background-color: #F2F2F2;
+    box-shadow: 0px 2px 14px 3px rgba(0,0,0,0.25);
+}
+
+.main-content .calculator p:first-child{
+    font-size: 18px;
+    font-weight: 500;
+    color: #A8A8A8;
+    text-align: start;
+    width: 100%;
+}
+
+.main-content .calculator .screen{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: #A8A8A8;
+    padding: 7px;
+    width: 100%;
+    height: 79px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 14px 3px rgba(0,0,0,0.25);
+}
+
+.main-content .calculator .screen p{
+    color: white;
+}
+
+.main-content .calculator .screen p:first-child{
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.main-content .calculator .screen p:last-child{
+    font-size: 30px;
+    font-weight: 700;
+}
+
+/* THE NUMBERS AND OPERATIONS PAD */
+
+.pad {
+    width: 100%;
+    height: 259px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pad .button-holder{
+    width: 65px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #757575;
+    cursor: pointer;
+}
+
+.pad .button-holder button{
+    width: 100%;
+    height: 31px;
+    border-radius: 8px;
+    background-color: #9D9D9D;
+    color: white;
+    border: none;
+    outline: 0;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+    /* NUMBER PAD */
+    .pad .number-pad {
+        display: grid;
+        align-self: flex-end;
+        width: 225px;
+        height: 202px;
+        grid-template-columns: repeat(3,1fr);
+        grid-template-rows: repeat(4,1fr);
+    }
+
+    .pad .equal-button {
+    
+        background-color: #9D9D9D !important;
+    }
+    
+    .pad .equal-button button{
+        
+        background-color: #757575 !important;
+    }
+
+    
+
+    /* OPERATION PAD */
+    .pad .operation-pad{
+        display: grid;
+        width: 65px;
+        height: inherit;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5,1fr);
+    }
+
+    .pad .clear-button {
+    
+        background-color: #D92D2D !important;
+    }
+    
+    .pad .clear-button button{
+        
+        background-color: #FF5E5E !important;
+    }
+
+/* HISTORY */
+
+.main-content .history {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    height: 410px;
+    width: 371px;
+    margin-left: 23px;
+    padding: 10px 23px;
+    border-radius: 8px;
+    background-color: #F2F2F2;
+    box-shadow: 0px 2px 14px 3px rgba(0,0,0,0.25);
+}
+.main-content .history .results{
+    display: flex;
+    flex-direction: column-reverse;
+    
+
+}
+
+.main-content .history p:first-child{
+    font-size: 18px;
+    font-weight: 500;
+    color: #A8A8A8;
+    text-align: start;
+    width: 100%;
+}
+
+.main-content .history .results .screen{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: #A8A8A8;
+    padding: 7px;
+    width: 100%;
+    height: 79px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 14px 3px rgba(0,0,0,0.25);
+}
+
+.main-content .history .results .screen p{
+    color: white;
+}
+
+.main-content .history .results .screen p:first-child{
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.main-content .history .results .screen p:last-child{
+    font-size: 30px;
+    font-weight: 700;
 }
