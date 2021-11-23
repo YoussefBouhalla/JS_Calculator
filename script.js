@@ -1,17 +1,47 @@
-// add function
-let add = (nbr1,nbr2) => nbr1 + nbr2;
+// operate function
+// give it an **operation** and two **numbers** and return the result
+let operate = (operation,nbr1,nbr2) => {
 
-// substract function
-let substract = (nbr1,nbr2) => nbr1 - nbr2;
+    // init add function
+    let add = (nb1,nb2) => nb1 + nb2;
 
-// multiply function
-let multiply = (nbr1,nbr2) => nbr1 * nbr2;
+    // init substract function
+    let substract = (nb1,nb2) => nb1 - nb2;
 
-// divide function
-let divide = (nbr1,nbr2) => {
-    if (nbr2 == 0) {
-        return "syntaxe error";
-    }else{
-        return nbr1 / nbr2;
+    // init multiply function
+    let multiply = (nb1,nb2) => nb1 * nb2;
+
+    // init divide function
+    let divide = (nb1,nb2) => {
+        if (nb2 == 0) {
+            return "syntaxe error";
+        }else{
+            return nb1 / nb2;
+        }
+    }
+
+    // call cases based on the operation giving in the function operate
+    switch (operation) {
+        case 'addition':
+            // calling the add function
+            return add(nbr1,nbr2)
+            break;
+        case 'substraction':
+            // calling the substract function
+            return substract(nbr1,nbr2)
+            break;
+        case 'multiplication':
+            // calling the multiply function
+            return multiply(nbr1,nbr2)
+            break;
+        case 'division':
+            // calling the divide function
+            return divide(nbr1,nbr2)
+            break;
+    
+        default:
+            break;
     }
 }
+
+
