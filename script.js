@@ -44,4 +44,18 @@ let operate = (operation,nbr1,nbr2) => {
     }
 }
 
+// let buttonAction = (btnValue) => {
+
+//     let ConcatNumber = ()=
+//     switch (btnValue) {
+//         case "=":
+            
+//             break;
+    
+//         default:
+//             break;
+//     }
+
+// }
+
 
