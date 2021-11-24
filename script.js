@@ -15,8 +15,13 @@ let buttonAction = (btnValue) => {
     // give it an **operation** and two **numbers** and return the result
     let operate = () => {
 
+        // adding the number in the realtime input to the end of the number array
+        numbers.push(parseInt(realTimeInput.innerHTML));
+
         // init add function
-        let add = (nb1,nb2) => nb1 + nb2;
+        let add = (nb1,nb2) => {
+           globalResult = nb1 + nb2;
+        }
 
         // init substract function
         let substract = (nb1,nb2) => nb1 - nb2;
@@ -33,44 +38,78 @@ let buttonAction = (btnValue) => {
             }
         }
 
+        let globalResult = 0;
 
-        // call cases based on the operation giving in the function operate
-        switch (operators[0]) {
-            case '+':
-                // calling the add function
-                operators.shift();
-                let resultPlus = add(numbers[0],numbers[1]);
-                numbers.splice(0,2);
-                numbers.unshift(resultPlus);
-                return resultPlus;
+        for (let index = 0; index < operators.length; index += 2) {
 
-            case '-':
-                // calling the substract function
-                operators.shift();
-                let resultSub = substract(numbers[0],numbers[1]);
-                numbers.splice(0,2);
-                numbers.unshift(resultSub);
-                return resultSub
+            // call cases based on the operation giving in the function operate
+            switch (operators[index]) {
+                case '+':
+                    // calling the add function
+                    // operators.shift();
+                    let resultPlus;
+                    if (index == 0) {
+                        resultPlus = add(globalResult,numbers[index]);
+                    }else{
+                        resultPlus = add(numbers[index],numbers[index+1]);
+                    }
+                    // numbers.splice(0,2);
+                    // numbers.unshift(resultPlus);
+                    return resultPlus;
 
-            case '×':
-                // calling the multiply function
-                operators.shift();
-                let resultMult = multiply(numbers[0],numbers[1]);
-                numbers.splice(0,2);
-                numbers.unshift(resultMult);
-                return resultMult
+                case '-':
+                    // calling the substract function
+                    // operators.shift();
+                    let resultSub;
+                    if (index == 0) {
+                        resultSub = substract(globalResult,numbers[index])
+                    }else{
+                        resultSub = substract(numbers[index],numbers[index+1])
+                    }
+                    // numbers.splice(0,2);
+                    // numbers.unshift(resultSub);
 
-            case '÷':
-                // calling the divide function
-                operators.shift();
-                let resultDiv = multiply(numbers[0],numbers[1]);
-                numbers.splice(0,2);
-                numbers.unshift(resultDiv);
-                return resultDiv
+                    return resultSub
 
-            default:
-                break;
+                case '×':
+                    // calling the multiply function
+                    // operators.shift();
+                    let resultMult;
+                    if (index == 0) {
+                        resultMult = multiply(globalResult,numbers[index])
+                    }else{
+                        resultMult = multiply(numbers[index],numbers[index+1])
+                    }
+                    // numbers.splice(0,2);
+                    // numbers.unshift(resultMult);
+                    return resultMult
+
+                case '÷':
+                    // calling the divide function
+                    // operators.shift();
+                    let resultDiv;
+                    if (index == 0) {
+                        resultDiv = divide(globalResult,numbers[index])
+                    }else{
+                        resultDiv = divide(numbers[index],numbers[index+1])
+                    }
+                    // numbers.splice(0,2);
+                    // numbers.unshift(resultDiv);
+                    return resultDiv
+
+                default:
+                    break;
+            }
+            
         }
+        
+            
+        
+        storedResult.innerHTML += realTimeInput.innerHTML.concat('=');
+        realTimeInput.innerHTML = '0';
+        console.log({numbers,operators});
+        
+        
     }
 
     // take a number and change the innerhtml of the input in the screen
@@ -204,7 +243,6 @@ let buttonAction = (btnValue) => {
             break;
     }
 
-    console.log({operators,numbers});
 
 }
 
