@@ -4,6 +4,7 @@ let numbers = [];
 // array for the stored operators
 let operators = ['+'];
 
+// init the final result
 let globalResult = 0;
 
 // take a button value and do an action based on that value
@@ -44,8 +45,6 @@ let buttonAction = (btnValue) => {
             }
         }
 
-        
-
         for (let index = 0; index < operators.length; index ++) {
 
             // call cases based on the operation giving in the function operate
@@ -71,8 +70,6 @@ let buttonAction = (btnValue) => {
             }
             
         }
-        
-            
         
         storedResult.innerHTML += realTimeInput.innerHTML.concat('=');
         realTimeInput.innerHTML = globalResult.toString();        
@@ -101,42 +98,12 @@ let buttonAction = (btnValue) => {
         }
     }
 
-    // concat add to the stored input innerHtml and the numbers/operators arrays
-    let ConcatAdd = () => {
+    // concat an operation to the stored input innerHtml and the numbers/operators arrays
+    let ConcatOperation = (operation) => {
         if (realTimeInput.innerHTML !== "0") {
-            storedResult.innerHTML += realTimeInput.innerHTML.concat("+");
+            storedResult.innerHTML += realTimeInput.innerHTML.concat(operation);
             numbers.push(parseInt(realTimeInput.innerHTML));
-            operators.push("+")
-            realTimeInput.innerHTML = "0";
-        }
-    }
-
-    // concat sub to the stored input innerHtml and the numbers/operators arrays
-    let ConcatSub = () => {
-        if (realTimeInput.innerHTML !== "0") {
-            storedResult.innerHTML += realTimeInput.innerHTML.concat("-");
-            numbers.push(parseInt(realTimeInput.innerHTML));
-            operators.push("-")
-            realTimeInput.innerHTML = "0";
-        }
-    }
-
-    // concat mult to the stored input innerHtml and the numbers/operators arrays
-    let ConcatMult = () => {
-        if (realTimeInput.innerHTML !== "0") {
-            storedResult.innerHTML += realTimeInput.innerHTML.concat("×");
-            numbers.push(parseInt(realTimeInput.innerHTML));
-            operators.push("×")
-            realTimeInput.innerHTML = "0";
-        }
-    }
-
-    // concat Div to the stored input innerHtml and the numbers/operators arrays
-    let ConcatDiv = () => {
-        if (realTimeInput.innerHTML !== "0") {
-            storedResult.innerHTML += realTimeInput.innerHTML.concat("÷");
-            numbers.push(parseInt(realTimeInput.innerHTML));
-            operators.push("÷")
+            operators.push(operation)
             realTimeInput.innerHTML = "0";
         }
     }
@@ -190,26 +157,25 @@ let buttonAction = (btnValue) => {
 
         // concatinate the operators
         case "+":
-            ConcatAdd();
+            ConcatOperation("+");
             break;
 
         case "-":
-            ConcatSub();
+            ConcatOperation("-");
             break;
 
         case "×":
-            ConcatMult();
+            ConcatOperation("×");
             break;
 
         case "÷":
-            ConcatDiv();
+            ConcatOperation("÷");
             break;
         
         // default do nothing
         default:
             break;
     }
-
 
 }
 
