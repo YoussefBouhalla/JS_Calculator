@@ -13,7 +13,8 @@ let buttonAction = (btnValue) => {
     // getting the screen results nodes
     let realTimeInput = document.getElementById("realtime-input");
     let storedResult = document.getElementById("stored-result");
-
+    // getting the history element
+    let history = document.getElementById('results');
     // operate function
     // give it an **operation** and two **numbers** and return the result
     let operate = () => {
@@ -88,7 +89,29 @@ let buttonAction = (btnValue) => {
 
     // make the innerhtml of the input = "0" in the screen
     let ClearInput = () => {
+        if (storedResult.innerHTML.includes("=")) {
+            // when Equal is clicked send the data to the history and clear everything
+            // sending the data to the history and creating the screen element
+            let strResult = document.createElement("P");
+            let genResult = document.createElement("P");
+            strResult.appendChild(document.createTextNode(storedResult.innerHTML));
+            genResult.appendChild(document.createTextNode(realTimeInput.innerHTML));
+            let screen = document.createElement("DIV");
+            screen.appendChild(strResult);
+            screen.appendChild(genResult);
+            screen.classList.add("screen");
+            history.appendChild(screen);
+            // clearing the data
+            globalResult = 0;
+            numbers = [];
+            operators = ["+"];
+            // clearing the inputs
             realTimeInput.innerHTML = "0";
+            storedResult.innerHTML = "";
+        }else{
+            // clear the realtime input only
+            realTimeInput.innerHTML = "0";
+        }
     }
 
     // cocatinate a dot to the number
