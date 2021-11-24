@@ -1,56 +1,81 @@
-// operate function
-// give it an **operation** and two **numbers** and return the result
-let operate = (operation,nbr1,nbr2) => {
 
-    // init add function
-    let add = (nb1,nb2) => nb1 + nb2;
-
-    // init substract function
-    let substract = (nb1,nb2) => nb1 - nb2;
-
-    // init multiply function
-    let multiply = (nb1,nb2) => nb1 * nb2;
-
-    // init divide function
-    let divide = (nb1,nb2) => {
-        if (nb2 == 0) {
-            return "syntaxe error";
-        }else{
-            return nb1 / nb2;
-        }
-    }
-
-    // call cases based on the operation giving in the function operate
-    switch (operation) {
-        case 'addition':
-            // calling the add function
-            return add(nbr1,nbr2)
-
-        case 'substraction':
-            // calling the substract function
-            return substract(nbr1,nbr2)
-
-        case 'multiplication':
-            // calling the multiply function
-            return multiply(nbr1,nbr2)
-
-        case 'division':
-            // calling the divide function
-            return divide(nbr1,nbr2)  
-
-        default:
-            break;
-    }
-}
+// array for the stored numbers
+let numbers = [];
+// array for the stored operators
+let operators = [];
 
 // take a button value and do an action based on that value
 let buttonAction = (btnValue) => {
+
+    // getting the screen results nodes
     let realTimeInput = document.getElementById("realtime-input");
+    let storedResult = document.getElementById("stored-result");
+
+    // operate function
+    // give it an **operation** and two **numbers** and return the result
+    let operate = () => {
+
+        // init add function
+        let add = (nb1,nb2) => nb1 + nb2;
+
+        // init substract function
+        let substract = (nb1,nb2) => nb1 - nb2;
+
+        // init multiply function
+        let multiply = (nb1,nb2) => nb1 * nb2;
+
+        // init divide function
+        let divide = (nb1,nb2) => {
+            if (nb2 == 0) {
+                return "syntaxe error";
+            }else{
+                return nb1 / nb2;
+            }
+        }
+
+
+        // call cases based on the operation giving in the function operate
+        switch (operators[0]) {
+            case '+':
+                // calling the add function
+                operators.shift();
+                let resultPlus = add(numbers[0],numbers[1]);
+                numbers.splice(0,2);
+                numbers.unshift(resultPlus);
+                return resultPlus;
+
+            case '-':
+                // calling the substract function
+                operators.shift();
+                let resultSub = substract(numbers[0],numbers[1]);
+                numbers.splice(0,2);
+                numbers.unshift(resultSub);
+                return resultSub
+
+            case '×':
+                // calling the multiply function
+                operators.shift();
+                let resultMult = multiply(numbers[0],numbers[1]);
+                numbers.splice(0,2);
+                numbers.unshift(resultMult);
+                return resultMult
+
+            case '÷':
+                // calling the divide function
+                operators.shift();
+                let resultDiv = multiply(numbers[0],numbers[1]);
+                numbers.splice(0,2);
+                numbers.unshift(resultDiv);
+                return resultDiv
+
+            default:
+                break;
+        }
+    }
 
     // take a number and change the innerhtml of the input in the screen
     let ConcatNumber = (number) => {
         
-
         if (realTimeInput.innerHTML !== "0") {
             realTimeInput.innerHTML += number.toString();
         }else{
@@ -59,12 +84,60 @@ let buttonAction = (btnValue) => {
     }
 
     // make the innerhtml of the input = "0" in the screen
-    let clearInput = () => {
+    let ClearInput = () => {
             realTimeInput.innerHTML = "0";
-        
+    }
+
+    // cocatinate a dot to the number
+    let ConcatDot = () => {
+        if (!realTimeInput.innerHTML.includes(".")) {
+            realTimeInput.innerHTML += ".";
+        }
+    }
+
+    // concat add to the stored input innerHtml and the numbers/operators arrays
+    let ConcatAdd = () => {
+        if (realTimeInput.innerHTML !== "0") {
+            storedResult.innerHTML += realTimeInput.innerHTML.concat("+");
+            numbers.push(parseInt(realTimeInput.innerHTML));
+            operators.push("+")
+            realTimeInput.innerHTML = "0";
+        }
+    }
+
+    // concat sub to the stored input innerHtml and the numbers/operators arrays
+    let ConcatSub = () => {
+        if (realTimeInput.innerHTML !== "0") {
+            storedResult.innerHTML += realTimeInput.innerHTML.concat("-");
+            numbers.push(parseInt(realTimeInput.innerHTML));
+            operators.push("-")
+            realTimeInput.innerHTML = "0";
+        }
+    }
+
+    // concat mult to the stored input innerHtml and the numbers/operators arrays
+    let ConcatMult = () => {
+        if (realTimeInput.innerHTML !== "0") {
+            storedResult.innerHTML += realTimeInput.innerHTML.concat("×");
+            numbers.push(parseInt(realTimeInput.innerHTML));
+            operators.push("×")
+            realTimeInput.innerHTML = "0";
+        }
+    }
+
+    // concat Div to the stored input innerHtml and the numbers/operators arrays
+    let ConcatDiv = () => {
+        if (realTimeInput.innerHTML !== "0") {
+            storedResult.innerHTML += realTimeInput.innerHTML.concat("÷");
+            numbers.push(parseInt(realTimeInput.innerHTML));
+            operators.push("÷")
+            realTimeInput.innerHTML = "0";
+        }
     }
 
     switch (btnValue) {
+
+        // calling the ConcatNumber function by the value
         case "1":
             ConcatNumber(1);
             break;
@@ -96,36 +169,49 @@ let buttonAction = (btnValue) => {
             ConcatNumber(0);
             break;
         case ".":
-            
+            ConcatDot();
             break;
+
+        // equal case
         case "=":
-            
+            operate();
             break;
+
+        // clear case call ClearInput function
         case "C":
-            clearInput();
+            ClearInput();
             break;
+
+        // concatinate the operators
         case "+":
-            
+            ConcatAdd();
             break;
+
         case "-":
-            
+            ConcatSub();
             break;
+
         case "×":
-            
+            ConcatMult();
             break;
+
         case "÷":
-            
+            ConcatDiv();
             break;
-    
+        
+        // default do nothing
         default:
             break;
     }
+
+    console.log({operators,numbers});
 
 }
 
 // getting all the pad buttons and calling for the buttonAction function
 let padButtons = document.querySelectorAll(".button-holder");
 
+// looping for each button in the pad and giving buttonAction function its innerText
 for (const padButton of padButtons) {
     padButton.addEventListener("click", (e) => {
         buttonAction(e.target.innerText);
