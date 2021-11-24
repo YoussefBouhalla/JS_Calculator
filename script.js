@@ -2,7 +2,9 @@
 // array for the stored numbers
 let numbers = [];
 // array for the stored operators
-let operators = [];
+let operators = ['+'];
+
+let globalResult = 0;
 
 // take a button value and do an action based on that value
 let buttonAction = (btnValue) => {
@@ -24,78 +26,45 @@ let buttonAction = (btnValue) => {
         }
 
         // init substract function
-        let substract = (nb1,nb2) => nb1 - nb2;
+        let substract = (nb1,nb2) => {
+            globalResult = nb1 - nb2;
+        };
 
         // init multiply function
-        let multiply = (nb1,nb2) => nb1 * nb2;
+        let multiply = (nb1,nb2) => {
+            globalResult = nb1 * nb2;
+        };
 
         // init divide function
         let divide = (nb1,nb2) => {
             if (nb2 == 0) {
-                return "syntaxe error";
+                globalResult = "syntaxe error";
             }else{
-                return nb1 / nb2;
+                globalResult = nb1 / nb2;
             }
         }
 
-        let globalResult = 0;
+        
 
-        for (let index = 0; index < operators.length; index += 2) {
+        for (let index = 0; index < operators.length; index ++) {
 
             // call cases based on the operation giving in the function operate
             switch (operators[index]) {
                 case '+':
-                    // calling the add function
-                    // operators.shift();
-                    let resultPlus;
-                    if (index == 0) {
-                        resultPlus = add(globalResult,numbers[index]);
-                    }else{
-                        resultPlus = add(numbers[index],numbers[index+1]);
-                    }
-                    // numbers.splice(0,2);
-                    // numbers.unshift(resultPlus);
-                    return resultPlus;
+                    add(globalResult,numbers[index]);
+                    break;
 
                 case '-':
-                    // calling the substract function
-                    // operators.shift();
-                    let resultSub;
-                    if (index == 0) {
-                        resultSub = substract(globalResult,numbers[index])
-                    }else{
-                        resultSub = substract(numbers[index],numbers[index+1])
-                    }
-                    // numbers.splice(0,2);
-                    // numbers.unshift(resultSub);
-
-                    return resultSub
+                    substract(globalResult,numbers[index])
+                    break;
 
                 case '×':
-                    // calling the multiply function
-                    // operators.shift();
-                    let resultMult;
-                    if (index == 0) {
-                        resultMult = multiply(globalResult,numbers[index])
-                    }else{
-                        resultMult = multiply(numbers[index],numbers[index+1])
-                    }
-                    // numbers.splice(0,2);
-                    // numbers.unshift(resultMult);
-                    return resultMult
+                    multiply(globalResult,numbers[index])
+                    break;
 
                 case '÷':
-                    // calling the divide function
-                    // operators.shift();
-                    let resultDiv;
-                    if (index == 0) {
-                        resultDiv = divide(globalResult,numbers[index])
-                    }else{
-                        resultDiv = divide(numbers[index],numbers[index+1])
-                    }
-                    // numbers.splice(0,2);
-                    // numbers.unshift(resultDiv);
-                    return resultDiv
+                    divide(globalResult,numbers[index])
+                    break;
 
                 default:
                     break;
@@ -106,9 +75,7 @@ let buttonAction = (btnValue) => {
             
         
         storedResult.innerHTML += realTimeInput.innerHTML.concat('=');
-        realTimeInput.innerHTML = '0';
-        console.log({numbers,operators});
-        
+        realTimeInput.innerHTML = globalResult.toString();        
         
     }
 
